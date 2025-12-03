@@ -1,0 +1,40 @@
+{
+  "name": "file_uploader",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "cross-env NODE_ENV=development node --watch app.js",
+    "prod": "cross-env NODE_ENV=production node app.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "seed-and-start": "npx prisma migrate deploy && npm run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "^6.18.0",
+    "@quixo3/prisma-session-store": "^3.1.13",
+    "@supabase/supabase-js": "^2.80.0",
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.3.1",
+    "multer": "^2.0.2",
+    "node-cron": "^4.2.1",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "prisma": "^6.18.0"
+  },
+  "devDependencies": {
+    "@prisma/adapter-pg": "^7.0.1",
+    "autoprefixer": "^10.4.22",
+    "cross-env": "^10.1.0",
+    "pg": "^8.16.3",
+    "tsx": "^4.20.6"
+  }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Log In</title>
+  <link rel="stylesheet"  href="/css/styles.css">
+</head>
+<body>
+  <nav class="nav-bar">
+    <p>File Uploader</p>
+    <a href="/">Back</a>
+  </nav>
+  <article class="file-form-wrapper">
+    <form action="/up-files/<%= currentUser.id%>" class="form-group form-file" enctype="multipart/form-data" method="POST">
+        <div class="form-group">
+            <input type="file" class="form-control-file" name="uploaded_files" multiple>
+            <input type="submit" value="Submit" class="btn-files btn-default">
+        </div>
+    </form>
+    <form action="/share-files/<%= currentUser.id%>" class="form-group form-share" method="POST">
+        <div class="form-group">
+            <select name="exp" id="exp">
+              <option value="1 day">a day</option>
+              <option value="1 week">a week</option>
+              <option value="1 month">a month</option>
+            </select>
+            <input type="submit" value="Share" class="btn-files btn-default">
+        </div>
+    </form>
+  </article>
+    <% if (shared) {%>
+      <a href="/shared-files/<%= currentUser.id %>" class="shared-link">Shared Folder</a>
+    <% } %>
+    <% if (files[0]) {%>
+      <section>
+        <% files.forEach((file)=>{ %>
+          <img src="<%= file.url %>" alt="">
+        <% }) %>
+      </section>
+    <% } %>
+</body>
+</html>

@@ -1,0 +1,288 @@
+:root {
+    --color-principal: #007bff;
+    --color-terciario: #18702b;
+    --color-secundario: #6c757d;
+    --color-fondo: #1c1e20;
+    --color-claro: #99a3a3;
+    --color-oscuro: #343a40;
+    --fuente-principal: 'System UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    font-family: var(--fuente-principal);
+    background-color: var(--color-fondo);
+    color: var(--color-oscuro);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: var(--color-principal);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+a {
+    color: #b3d0e0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-secundario);
+}
+
+.nav-bar {
+    width: 100%;
+    margin-bottom: 50px;
+    background-color: var(--color-oscuro);
+    padding: 0px 30px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    color: var(--color-claro);
+    p{
+        font-size: 24px;
+        font-weight: bold;
+    }
+}
+
+.form-seccion {
+    background-color: var(--color-claro);
+    padding: 30px;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 20px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    gap: 5px;
+    .btn{
+        flex: 1;
+        justify-self: center;
+        width: 100%;
+    }
+}
+.file-form-wrapper{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.form-file{
+    background-color: var(--color-claro);
+    padding: 5px 15px;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    gap: 5px;
+    div{
+        display: flex;
+        align-items: center;
+        gap: 3px;
+    }
+    input[type="file"]{
+        padding: 5px;
+        border-radius: 4px;
+        border-color: transparent;
+        color: var(--color-oscuro);
+        background-color: var(--color-claro);
+        box-sizing: border-box;
+        transition: background-color 0.3s ease,color 0.3s ease;
+    }
+    input[type="file"]:hover{
+        color: #ddd;
+        background-color: var(--color-oscuro);
+    }
+    .btn-files{
+        display: inline-block;
+        padding: 12px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: var(--color-oscuro);
+        background-color: var(--color-claro);
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 4px;
+    }
+    .btn-files:hover {
+        background-color: var(--color-terciario);
+        color: #ddd;
+    }
+}
+.form-share{
+    background-color: var(--color-claro);
+    padding: 5px 15px;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    gap: 5px;
+    div{
+        display: flex;
+    }
+    select{
+        padding: 5px;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        border-color: transparent;
+        background-color: var(--color-claro);
+        box-sizing: border-box;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    select:hover{ 
+        background-color: var(--color-oscuro);
+        color: #ddd;
+    }
+    select:focus {
+        outline: none;
+    }
+    .btn-files{
+        display: inline-block;
+        padding: 12px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: var(--color-oscuro);
+        background-color: var(--color-claro);
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: none;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+    .btn-files:hover {
+        background-color: var(--color-terciario);
+        color: #ddd;
+    }
+}
+.shared-link {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: var(--color-oscuro);
+    border-radius: 4px;
+    text-align: center;
+    word-break: break-all;
+}
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: var(--color-principal);
+    outline: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--color-claro);
+    background-color: var(--color-principal);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.bienvenida a {
+    margin: 0 10px;
+    padding: 12px 20px;
+    background-color: var(--color-secundario);
+    color: var(--color-claro);
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.bienvenida a:hover {
+    background-color: #5a6268;
+}
+
+/* Estilos para la sección de imágenes */
+section {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+img {
+    z-index: 5;
+    max-width: 300px;
+    height: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.05);
+}
+img:active{
+    z-index: 10;
+    transform: scale(2.05);
+}
+
+/* Estilos para pantallas pequeñas (móviles) */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    form {
+        padding: 20px;
+    }
+
+    .btn {
+        padding: 10px;
+    }
+
+    .bienvenida a {
+        display: block;
+        margin: 10px 0;
+    }
+}

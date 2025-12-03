@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body style="margin-top: 50px;">
+  
+  <h1>Sign Up</h1>
+  
+  <form action="/sign-up" class="form-group form-seccion" method="POST">
+    <% if(error) {%>
+      <span style="color: rgb(189, 0, 0); font-weight: bold; align-self: center; text-shadow: 1px 1px 2px whitesmoke;"><%= error.message %></span>
+    <%}%>
+    <label for="username">Username</label>
+    <input id="username" name="username" placeholder="username" type="text" />
+    <label for="password">Password</label>
+    <input id="password" name="password" placeholder="password" type="password" />
+    <button type="submit" class="btn">Sign Up</button>
+  </form>
+</body>
+</html>

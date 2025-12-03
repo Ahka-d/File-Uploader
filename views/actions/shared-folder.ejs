@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Log In</title>
+  <link rel="stylesheet"  href="/css/styles.css">
+</head>
+<body style="margin: 15px;">
+  <div>
+    <span><%= url %></span>
+  </div>
+    <% if (files[0]) { %>
+      <section>
+        <% files.forEach((file)=>{ %>
+          <% file.url.forEach((url)=>{ %>
+          <img src="<%= url %>" alt="">
+          <% }) %>
+        <% }) %>
+      </section>
+    <% } %>
+</body>
+</html>

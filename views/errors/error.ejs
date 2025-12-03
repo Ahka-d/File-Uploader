@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ha ocurrido un error</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 20px; text-align: center; }
+        .error-container { background-color: #ffffff; border: 1px solid #dee2e6; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 20px; max-width: 600px; margin: 50px auto; }
+        h1 { color: #dc3545; }
+        p { color: #6c757d; }
+        pre { background-color: #f1f1f1; border: 1px solid #ccc; padding: 10px; text-align: left; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <% if (error) { %>
+            <h1>Error <%= error.statusCode %></h1>
+            <p><%= error.message %></p>
+            <% if (error.stack) { %>
+                <pre><%= error.stack %></pre>
+            <% } %>
+        <% } else { %>
+            <h1>Se ha producido un error inesperado</h1>
+            <p>Por favor, inténtelo de nuevo más tarde.</p>
+        <% } %>
+    </div>
+</body>
+</html>
