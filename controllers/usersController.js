@@ -139,42 +139,12 @@ exports.postFiles = [upload.array('uploaded_files', 10), async (req, res, next) 
 }]
 // compartir archivos
 exports.postShareFiles = async (req, res, next) => {
-  const bucketName = 'images';
-  const sourceFolder = 'public';
-  const destinationFolder = `share${req.params.id}`
-  const shared = await connection.$queryRaw`SELECT * FROM sharefiles WHERE "workspaceId" = ${req.params.id}`
-  if(!shared[0]){
-  
-  const date = calculateExpirationDate(req.body.exp)
+  const uploadedUrls = []
+  try {
+    const publicUrls = await connection.$queryRaw`SELECT url FROM files WHERE "workspaceId" = ${req.params.id}`
+    publicUrls.forEach((publicUrl,index) => uploadedUrls.push(publicUrl.url[0]))
 
-    try {
-      const { data: list, error: listError } = await supabase.storage
-        .from(bucketName)
-        .list(sourceFolder);
-      if (listError) throw listError;
-      
-      if (!list || list.length === 0) {
-        throw new ErrorWrapper("La carpeta está vacía. No hay nada que copiar.", 400);
-      }
-
-      const uploadedUrls = []
-      for (const file of list) {
-        const sourcePath = `${sourceFolder}/${file.name}`;
-        const destinationPath = `${destinationFolder}/${file.name}`;
-
-        const { data, error } = await supabase.storage
-          .from(bucketName)
-          .copy(sourcePath, destinationPath);
-
-        if (error) {
-          console.error(`Error al copiar el archivo ${file.name}:`, error);
-        } else {
-          const { publicUrl } = supabase.storage.from(bucketName).getPublicUrl(destinationPath).data
-          uploadedUrls.push(publicUrl)
-          
-          console.log(`Archivo ${file.name} copiado con éxito.`);
-        }
-      }
+      const date = calculateExpirationDate(req.body.exp) 
       await connection.sharefiles.create({
             data: {
               workspaceId: req.params.id,
@@ -182,15 +152,13 @@ exports.postShareFiles = async (req, res, next) => {
               url: uploadedUrls,
             }
           })
-      
-      console.log(`Carpeta "${sourceFolder}" copiada a "${destinationFolder}" con éxito.`);
+      console.log(`Archivos copiados con éxito.`); 
       const filesdata = await connection.$queryRaw`SELECT url FROM files WHERE "workspaceId" = ${req.params.id}`
       res.render("./actions/user-folder", {files:filesdata,shared:true})
     } catch (error) {
       console.error('Error al copiar la carpeta');
       next(error);
     }
-  }
 }
 // ver archivos compartidos
 exports.getShareFiles = async (req,res,next) => {
