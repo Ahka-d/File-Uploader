@@ -1,6 +1,9 @@
 function calculateExpirationDate(option) {
   const date = new Date();
   switch (option) {
+    case '1 hour':
+      date.setHours(date.getHours() + 1);
+      break;
     case '1 day':
       date.setDate(date.getDate() + 1);
       break;

@@ -3,9 +3,20 @@ const { PrismaClient } = require("./generated/prisma/client");
 
 const prisma = new PrismaClient();
 
-const deleteSupabaseOldPosts = async (now) => {
-  const sharefiles = await prisma.$queryRaw`SELECT "workspaceId" FROM sharefiles WHERE "expiresAt" <= ${now}`
-  if(sharefiles[0]){
+const deleteSupabaseOldPosts = async () => {
+  const sharefiles = await prisma.sharefiles.findMany({
+  where: {
+    expiresAt: {
+      lte: new Date(),
+    },
+  },
+  select: {
+    workspaceId: true,
+  },
+});
+  if(!sharefiles[0]){
+    console.log('No hay archivos para eliminar en este momento.');
+  }else{
     sharefiles.forEach(async (file) => {
       const bucket = 'images';
       const pathPrefix = `share${file.workspaceId}`;
@@ -66,17 +77,15 @@ const deleteSupabaseOldPosts = async (now) => {
         });
       }
     })
-  }else{
-    console.log('No hay archivos para eliminar en este momento.');
   }
 }
 
 exports.startCronJobs = async () => {
 
-  cron.schedule('0 7 * * *', async () => {
+  cron.schedule('0 * * * *', async () => {
     const now = new Date();
     console.log(`Ejecutando tarea de eliminación de posts a las: ${now.toISOString()}`);
-
+    deleteSupabaseOldPosts();
     try {
       const { count } = await prisma.sharefiles.deleteMany({
         where: {
@@ -89,9 +98,8 @@ exports.startCronJobs = async () => {
     } catch (error) {
       console.error('Error al eliminar posts expirados:', error);
     }
-    deleteSupabaseOldPosts(now);
   });
-
+  deleteSupabaseOldPosts();
   console.log('Tarea de cron para posts expirados programada.');
   const now = new Date();
     try {
@@ -106,5 +114,5 @@ exports.startCronJobs = async () => {
     } catch (error) {
       console.error('Error al eliminar posts expirados:', error);
     };
-    deleteSupabaseOldPosts(now);
+    
 };
